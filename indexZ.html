@@ -1,0 +1,69 @@
+<!--
+ * @Description: Description
+ * @Purpose: Powered By Fantastic Artwork Vue.js @ Evan You.
+ * @Version: 2.6.1
+ * @Author: PONY ZHANG
+ * @Date: 2021-03-11 18:15:38
+ * @LastEditors: PONY ZHANG
+ * @LastEditTime: 2021-03-30 18:55:52
+ * @motto: 「あなたに逢えなくなって、錆びた時計と泣いたけど…」
+ * @topic: # Carry Your World #
+ * @Github: Epic-Deno
+ * @Blogs: https://epic-deno.github.io/deno.github.io/
+ * @Pony: http://scorpionz.gitee.io/pony-zhang/
+ * @Juejin: https://juejin.im/user/1151943917713623
+ * @Zhihu: https://www.zhihu.com/people/zhang-zhen-36-44
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./qrcode.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        ul {
+            width: 400px;
+            height: 3000px;
+            background: cyan;
+            position: absolute;
+            right: 0;
+            bottom: -2px;
+            left: 0;
+            top: 0;
+            -webkit-overflow-scrolling: touch;
+            overflow-y: scroll;
+            margin-top: 43px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="qrcode"></div>
+    <ul>
+        <li></li>
+    </ul>
+    <iframe style="width: 100vw;height: 100vh;" src="http://47.101.172.200/ship/#/display?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTcwOTY2ODAsInVzZXJuYW1lIjoiMDE0MTQxIn0.1IJ0BMtboN1pThfNY3T89wWr83n7QtrrpmAgUTJwWuk" frameborder="0"></iframe>
+    <script>
+        var qrcode = new QRCode("qrcode", {
+            text: "http://scorpionz.gitee.io/pony-zhang/",
+            width: 128,
+            height: 128,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    </script>
+
+</body>
+
+</html>

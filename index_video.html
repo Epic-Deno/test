@@ -1,0 +1,28 @@
+<!--
+ * @Description: Powered By Fantastic Artwork Vue.js @ Evan You.
+ * @Purpose: Purpose
+ * @Version: 2.6.1
+ * @Author: PONY ZHANG
+ * @Date: 2021-01-28 20:41:07
+ * @LastEditors: PONY ZHANG
+ * @LastEditTime: 2021-01-28 20:46:22
+ * @motto: 「あなたに逢えなくなって、錆びた時計と泣いたけど…」
+ * @topic: # Carry Your World #
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <video id="video-webrtc" controls></video>
+    <script type="text/javascript" src="./jswebrtc.min.js"></script>
+    <script type="text/javascript">
+		var video = document.getElementById('video-webrtc');
+		var url = 'webrtc://osiii.com/live/livestream';
+		var player = new JSWebrtc.Player(url, { video: video, autoplay: true, onPlay: (obj) => { console.log("start play") } });
+	</script>
+</body>
+</html>

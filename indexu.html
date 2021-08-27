@@ -1,0 +1,75 @@
+<!--
+ * @Description: KEEP CALM AND MAKE EPIC SHIT - PONY ZHANG
+ * @Version: 2.0
+ * @Autor: PONY ZHANG
+ * @Date: 2020-12-14 11:27:43
+ * @LastEditors: PONY ZHANG
+ * @LastEditTime: 2020-12-14 18:26:27
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./xm-select.js"></script>
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui-v2.5.5/css/layui.css">
+    <script src="https://www.layuicdn.com/layui-v2.5.5/layui.all.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
+</head>
+
+<body>
+
+    <div id="demo2" class="xm-select-demo"></div>
+    <div id="demo1" class="xm-select-demo"></div>
+
+    <button class="btn" id="demo2-getValue">获取选中值</button>
+
+    <br /><br />
+    <input type="text" class="frames1" value onchange="inputChange(this.value,1)" style="visibility: hidden;">
+    <input type="text" class="frames2" onchange="inputChange(this.value,2)" style="visibility: hidden;">
+    <script>
+        function inputChange(e,index) {
+            console.log(JSON.parse(e),index)
+        };
+        // var selet1, select2;
+        var obj = {
+            select1: '',
+            select2: ''
+        };
+        var demo2 = xmSelect.render({
+            el: '#demo2',
+            data: [
+                { name: '张三', value: 1 },
+                { name: '李四', value: 2 },
+                { name: '王五', value: 3 },
+            ]
+        })
+        var arr = [
+            { name: '张三', value: 1 },
+            { name: '李四', value: 2 },
+            { name: '王五', value: 3 },
+        ];
+        function XMSelect(array,i) {
+            return xmSelect.render({
+                el: `#demo${i+1}`,
+                data: array,
+                on: (data) => {
+                    let targetElem = document.getElementsByClassName(`frames${i+1}`)[0]
+                    targetElem.value = JSON.stringify(data.arr);
+                }
+            })
+        }
+
+        for (var i = 0; i < 2; i++) {
+
+            obj[`select${i + 1}`] = XMSelect(arr,i);
+        }
+      
+    </script>
+
+</body>
+
+</html>

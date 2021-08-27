@@ -1,0 +1,541 @@
+<!--
+ * @Description: Created By Pony
+ * @Author: Pony
+ * @Date: 2021-08-10 14:24:20
+ * @LastEditors: Pony
+ * @LastEditTime: 2021-08-27 16:50:14
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试路段</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .road_box {
+            width: calc(100vw - 80px);
+            /* height: 150px; */
+            margin: 0 auto;
+            background: rgba(8, 60, 100, 0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 44px 24px 60px;
+            position: relative;
+
+        }
+
+        .road_box::before {
+            display: block;
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 28px;
+            background: url(./img/start.png);
+            background-size: 100% 100%;
+            left: -10px;
+            top: 41px;
+            /* transform: translateY(-50%); */
+        }
+
+        .road_box::after {
+            display: block;
+            content: '';
+            width: 24px;
+            height: 28px;
+            background: url(./img/end.png);
+            background-size: 100% 100%;
+            position: absolute;
+            right: -10px;
+            top: 41px;
+            /* transform: translateY(-50%); */
+        }
+
+        li.roadSection {
+            /* width: calc((100% - 46px)/5); */
+            flex: 1;
+            height: 120px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        li.roadSection:nth-child(1) {
+            width: 120px;
+            flex: none;
+        }
+
+        /* li.roadSection:last-of-type > .road {
+            display:  none;
+        } */
+        .roadSection>.roadMiddleBox {
+            width: 120px;
+            height: 100%;
+            /* background: url(./img/roadCenter.png); */
+            background: #06102D;
+            border: 1px solid #187684;
+            opacity: 0.8;
+            cursor: pointer;
+            position: relative;
+        }
+
+        li.roadSection>.road {
+            flex: 1 1;
+            height: 25px;
+            background: rgba(137, 197, 253, .2);
+            border-top: 1px solid rgba(137, 197, 253, 0.5);
+            border-bottom: 1px solid rgba(137, 197, 253, 0.5);
+            position: relative;
+        }
+
+        .road::before {
+            display: bock;
+            content: '';
+            width: 100%;
+            height: 1px;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            border-top: 1px dashed rgba(137, 197, 253, 0.8);
+        }
+
+        li.roadSection>.danger_status {
+            border-color: #e30212;
+            background-color: transparent;
+        }
+
+        .danger_status::before {
+            border-color: #e30212;
+        }
+
+        .roadMiddleBox>.screen {
+            width: 26px;
+            height: 26px;
+            cursor: pointer;
+            position: absolute;
+            top: -34px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .roadName {
+            width: max-content;
+            font-size: 12px;
+            color: #60c6e9;
+            position: absolute;
+            bottom: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .statusBar {
+            width: max-content;
+            color: #fff;
+            border-radius: 4px;
+            padding: 1px 11px;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            font-size: 13px;
+            bottom: -51px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .success_bg {
+            color: #009b16;
+            border: 1px solid #009b16;
+        }
+
+        .danger_bg {
+            color: #ba0000;
+            border: 1px solid #ba0000;
+        }
+
+        .primary_bg {
+            color: #0481d0;
+            border: 1px solid #0481d0;
+        }
+
+        .warning_bg {
+            color: #e6882d;
+            border: 1px solid #e6882d;
+        }
+
+        .car {
+            width: 40px;
+            height: 20px;
+            background: url(./img/car.png);
+            background-size: 100% 100%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+        }
+
+        .car_content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+
+        }
+
+        ul.car_infos {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #9bd4fe;
+            width: max-content;
+        }
+
+        .controlArea {
+            margin: auto 40px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="controlArea">
+            <label>车：</label>
+            <select v-model="dataParams['carId']" @change="changeCar">
+                <option :value="carId" v-for="({ carNo, carId }, index) in moveCarList">{{ carNo }}</option>
+
+            </select>
+            <label>当前路口：</label>
+            <select v-model="dataParams['roadId']" @change="changeRoad">
+                <option :value="code" v-for="({ roadName, code }, index) in roadList">{{ roadName }}</option>
+
+            </select>
+            <label>当前路段的进度：</label>
+            <input type="range" v-model="dataParams['process']" @change="changePresent">
+        </div>
+        <ul class="road_box">
+
+            <li class="roadSection" v-for="(item, index) in newRoadList" :key="item['roadName']">
+                <!-- 路段 -->
+                <div class="road" :class="item['roadStatus'] == 0 && 'danger_status'">
+                    <button v-if="roadList.length > 6 && index == newRoadList.length -2 && isOption"
+                        @click="splitRoadArray(true)">add</button>
+                    <button v-if="roadList.length > 6 && index == newRoadList.length -2 && !isOption"
+                        @click="splitRoadArray(false)">reduce</button>
+                </div>
+                <div class="roadMiddleBox">
+                    <!-- 广告屏幕 -->
+                    <img src="./img/screen.png" alt="" class="screen">
+                    <!-- 路段名称 -->
+                    <div class="roadName">
+                        {{ item['roadName'] }}
+                    </div>
+                    <!-- 状态 -->
+                    <div class="statusBar" :class="filerClassName(item['status'])">{{ item['status_text'] }}</div>
+                </div>
+                <div class="car" v-for="(i, index) in moveCarList" :key="index" style="left: 0;"
+                    :id="'move_' + i['carId'] + '-' + item['code']" v-if="item['code'] === i['currentCode']">
+                    <div class="car_content">
+                        <ul class="car_infos">
+                            <li>尾车：{{ i['carNo'] }}</li>
+                            <li>车速：{{ i['speed'] }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <h1>{{clientWidth}}X{{clientHeight}}</h1>
+    </div>
+
+</body>
+<!-- 路段最多只能显示6个 其余的隐藏 -->
+<script>
+    // window.addEventListener("beforeunload", (e) => {
+    //     const data = { name: "Pony" };
+    //     window.navigator.sendBeacon("http://127.0.0.1:3002/loginout", JSON.stringify(data));
+    // });
+
+    const app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                dataParams: {
+                    carId: 1233,
+                    roadId: 121,
+                    process: 0
+                },
+                moveCarList: [
+                    {
+                        carId: 1233,
+                        carNo: '苏A12333',
+                        speedPercent: 20,
+                        currentCode: 121,
+                        speed: '40km/h'
+                    },
+                    {
+                        carId: 1633,
+                        speedPercent: 10,
+                        currentCode: 121,
+                        carNo: '苏B12333',
+                        speed: '50km/h'
+                    },
+                ],
+                roadList: [
+                    {
+                        roadName: '南京东路与北京西路1',
+                        status: 0,
+                        code: 121,
+                        status_text: '执行成功',
+                        needScreen: true,
+                        roadStatus: 0,
+                    },
+                    {
+                        roadName: '北京西路与拉萨路2',
+                        status: 0,
+                        code: 122,
+                        status_text: '执行成功',
+                        needScreen: true,
+                        roadStatus: 0,
+                    },
+                    {
+                        roadName: '拉萨路与上海路3',
+                        status: 1,
+                        code: 123,
+                        status_text: '执行中',
+                        needScreen: true,
+                        roadStatus: 1,
+                    },
+                    {
+                        roadName: '上海路与天津路4',
+                        status: 3,
+                        code: 124,
+                        status_text: '执行失败',
+                        needScreen: true,
+                        roadStatus: 0,
+                    },
+                    {
+                        roadName: '拉萨路与上海路5',
+                        status: 1,
+                        code: 125,
+                        status_text: '执行中',
+                        needScreen: true,
+                        roadStatus: 1,
+                    },
+                    {
+                        roadName: '上海路与天津路6',
+                        status: 3,
+                        code: 126,
+                        status_text: '执行失败',
+                        needScreen: true,
+                        roadStatus: 0,
+                    },
+                    {
+                        roadName: '拉萨路与上海路7',
+                        status: 1,
+                        code: 127,
+                        status_text: '执行中',
+                        needScreen: true,
+                        roadStatus: 1,
+                    },
+                    {
+                        roadName: '上海路与天津路8',
+                        status: 3,
+                        code: 128,
+                        status_text: '执行失败',
+                        needScreen: true,
+                        roadStatus: 0,
+                    },
+                    {
+                        roadName: '拉萨路与上海路9',
+                        status: 1,
+                        code: 129,
+                        status_text: '执行中',
+                        needScreen: true,
+                        roadStatus: 1,
+                    },
+                    {
+                        roadName: '上海路与天津路10',
+                        status: 3,
+                        code: 130,
+                        status_text: '执行失败',
+                        needScreen: true,
+                        roadStatus: 0,
+                    },
+                    // {
+                    //     roadName: '天津路与学则北路11',
+                    //     status: 2,
+                    //     status_text: '等待执行',
+                    //     needScreen: true,
+                    //     roadStatus: 1,
+                    // },
+                    {
+                        roadName: '学则北路与天元东路11',
+                        status: 2,
+                        code: 131,
+                        status_text: '等待执行',
+                        needScreen: true,
+                        roadStatus: 0,
+                    },
+                ],
+                timer: null,
+                currentlyIndex: 0,
+                newRoadList: [],
+                canSplit: false,
+                isOption: true,
+                clientWidth: 0,
+                clientHeight: 0
+            };
+        },
+        mounted() {
+            this.splitRoadArray(true)
+            // this.timer = setInterval(_ => {
+            //     this.moveCarList.map(i => {
+            //         this.looperCar(i);
+            //     })
+            // }, 3 * 1000)
+            this.clientWidth = document.body.clientWidth
+            this.clientHeight = document.body.clientHeight
+
+        },
+        methods: {
+            // 发现当前路段的
+            currentlyBuddy(num) {
+                let firstObj = this.roadList[0];
+                let lastObj = this.roadList[this.roadList.length - 1];
+                // 在原始的数据中找目标项目往前取
+                let looperArr = JSON.parse(JSON.stringify(this.roadList)).splice(1, this.roadList.length - 2);
+                let targetIndex = looperArr.findIndex(i => i['code'] == num)// 拿到下标
+                if (targetIndex) {
+                    // 往前减去三个
+                    let newIndex = targetIndex - 3
+                    return [firstObj, ...looperArr.splice(newIndex, 4), lastObj]
+                }
+                return []
+            },
+            // 改变车
+            changeCar() {
+                // this.dataParams['process'] = 0
+                this.changePresent()
+            },
+            // 改变路口
+            changeRoad() {
+                this.dataParams['process'] = 0
+                let targetCar = this.moveCarList.find(i => i.carId == this.dataParams.carId);
+                targetCar['currentCode'] = this.dataParams['roadId']
+                // 查看路口在新的序列里面吗 this.dataParams['roadId']
+                if (!this.newRoadList.some(i => i['code'] == this.dataParams['roadId'])) {
+                    this.newRoadList = this.currentlyBuddy( this.dataParams['roadId'])
+                }
+            },
+            // 变化百分比
+            changePresent() {
+                let targetCar = this.moveCarList.find(i => i.carId == this.dataParams.carId);
+                targetCar['currentCode'] = this.dataParams['roadId']
+                if (!this.newRoadList.some(i => i['code'] == this.dataParams['roadId'])) {
+                    this.newRoadList = this.currentlyBuddy( this.dataParams['roadId'])
+                }
+                this.$nextTick(_ => {
+                    let changeAbleCar = document.querySelector(`#move_${targetCar['carId']}-${this.dataParams['roadId']}`)
+                    // this.dataParams['process'] + '%'
+                    changeAbleCar.style.left = `calc(${this.dataParams['process']}% - 80px)`
+                })
+            },
+            // 切换轮回的路段
+            splitRoadArray() {
+                if (this.roadList.length > 6) {
+                    let firstObj = this.roadList[0];
+                    let lastObj = this.roadList[this.roadList.length - 1];
+                    let baseArr = JSON.parse(JSON.stringify(this.roadList)).splice(1, this.roadList.length - 2);
+                    // 获得的新的数组
+                    let maxSplitLength = Math.ceil(baseArr.length / 4)
+
+                    !this.isOption && this.currentlyIndex--;
+                    if (this.currentlyIndex >= 0 && this.currentlyIndex < maxSplitLength) {
+
+                        this.canSplit = true
+                        // 当前的页码 / 4 > 4
+                        let isEnd = baseArr.length - this.currentlyIndex * 4 < 4
+                        let nowArr = new Array()
+                        if (isEnd) {
+                            nowArr = baseArr.splice(-4)
+                        } else {
+                            nowArr = baseArr.splice(this.currentlyIndex * 4, 4)
+                        }
+                        this.newRoadList = [firstObj, ...nowArr, lastObj]
+                        this.isOption && this.currentlyIndex++;
+                        console.warn(this.currentlyIndex)
+
+
+                    } else {
+                        this.currentlyIndex >= maxSplitLength && (this.isOption = false)
+                        this.currentlyIndex >= maxSplitLength && (this.currentlyIndex = maxSplitLength - 1)
+                        this.currentlyIndex <= 0 && (this.isOption = true)
+                        this.currentlyIndex <= 0 && (this.currentlyIndex = 1)
+                        this.canSplit = false
+                        alert('已经没有多余的路口了')
+                    }
+
+                } else {
+                    this.newRoadList = this.roadList
+                }
+            },
+            filerClassName(status) {
+                switch (status) {
+                    case 0:
+                        return 'success_bg'
+                    case 1:
+                        return 'primary_bg'
+                    case 2:
+                        return 'warning_bg'
+                    case 3:
+                        return 'danger_bg'
+                    default:
+                        return ''
+
+                }
+            },
+            looperCar(item) {
+                const { carId, speedPercent, roadNo } = item;
+                const mainDistance = document.querySelector('.road_box').clientWidth - 26
+                const targetElement = document.getElementById(`move_${carId}`)
+                const roadDistance = document.querySelector('.road')
+                // roadNo
+                // 实际上一段路的长度
+                let roadLength = roadDistance.clientWidth + 42; // A - B 之间的宽度
+
+                let originalDistance = roadLength * (roadNo - 2);// 已经过的路段的距离
+                let distancePresent = (Math.floor(Math.random() * (100 - 1) + 1) / 100).toFixed(1); // 随取1 ～ 100
+                let currentlyDistance = roadLength * distancePresent; // 当前路段的距离
+                let newDistance = currentlyDistance + originalDistance // 新的距离
+                if (newDistance > mainDistance) {
+                    clearInterval(this.timer)
+                    targetElement.style.left = mainDistance + 'px'
+                    return
+                }
+                item.roadNo++;
+                if (targetElement) {
+
+                    targetElement.style.left = newDistance + 'px'
+                }
+            },
+        },
+    })
+</script>
+
+</html>

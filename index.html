@@ -1,0 +1,74 @@
+<!--
+ * @Description: Powered By Fantastic Artwork Vue.js @ Evan You.
+ * @Purpose: Purpose
+ * @Version: 2.6.1
+ * @Author: PONY ZHANG
+ * @Date: 2021-02-19 11:58:29
+ * @LastEditors: ZHANG ZHEN
+ * @LastEditTime: 2021-05-21 16:29:01
+ * @motto: 「あなたに逢えなくなって、錆びた時計と泣いたけど…」
+ * @topic: # Carry Your World #
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p~ul {
+            background: cyan;
+            position: relative;
+        }
+        p~ul::after {
+            display: block;
+            content: '*';
+            width: 20px;
+            height: 20px;
+            background: red;
+            position: absolute;
+            left: 120px;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+        } 
+    </style>
+</head>
+<body>
+    <p>前端 Framework</p>
+    <ul>
+        <li>Vue</li>
+        <li>React</li>
+        <li>Angular</li>
+    </ul>
+    <hr/>
+    <ul>
+        <li>Vue</li>
+        <li>React</li>
+        <li>Angular</li>
+    </ul>
+    <hr/>
+    <ul>
+        <li>Vue</li>
+        <li>React</li>
+        <li>Angular</li>
+    </ul>
+    <hr/>
+    <ul>
+        <li>Vue</li>
+        <li>React</li>
+        <li>Angular</li>
+    </ul>
+    <div id="div1"></div>
+    
+    <!-- <img src="http://file.mall.dian19.com//banner/15b3e406-5b7c-44e3-9cb9-f1fdd2926958.jpeg" width="906" alt=""> -->
+    <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
+    <script type="text/javascript">
+        const E = window.wangEditor
+        const editor = new E('#div1')
+        // 或者 const editor = new E( document.getElementById('div1') )
+        editor.create()
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!--
+ * @Description: Description
+ * @Author: ZHANG ZHEN
+ * @Date: 2021-06-21 22:53:39
+ * @LastEditors: ZHANG ZHEN
+ * @LastEditTime: 2021-06-21 23:40:22
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src='./js/tinymce/tinymce.min.js'></script>
+    <script>
+      function initData() {
+        tinymce.init({
+            selector: '#mytextarea',
+            mode : "textareas",
+            height: 650, //编辑器高度
+            min_height: 400,
+            plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern help emoticons autosave bdmap indent2em autoresize formatpainter axupimgs',
+            toolbar: 'code undo redo restoredraft | cut copy paste pastetext | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent | \
+    styleselect formatselect fontselect fontsizeselect | bullist numlist | blockquote subscript superscript removeformat | \
+    table image media charmap emoticons hr pagebreak insertdatetime print preview | fullscreen | bdmap indent2em lineheight formatpainter axupimgs',
+        });
+      }
+      initData();
+    </script>
+</head>
+
+<body>
+    <h1><a href="https://www.baidu.com">TinyMCE快速开始示例</a></h1>
+    <form method="post">
+        <textarea id="mytextarea"></textarea>
+        
+    </form>
+    <button onclick="getTextArea()"> save </button>
+    <button onclick="initData()"> restart </button>
+    <button onclick="destory()"> destory </button>
+
+
+    <script>
+        function getTextArea() {
+            // tinyMCE.execCommand('mceInsertContent',false, `<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7956e719e5ae482ca2de7da0b96f4b75~tplv-k3u1fbpfcp-watermark.image" width="640" height="360" alt="" data-mce-src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7956e719e5ae482ca2de7da0b96f4b75~tplv-k3u1fbpfcp-watermark.image" data-mce-selected="1"><br data-mce-bogus="1"></p>`);
+            let targetEL = tinyMCE.get('mytextarea').getContent()
+            console.log(targetEL)
+           
+        }
+        function destory() {
+            tinyMCE.get('mytextarea').destroy();// 销毁
+            document.getElementById('mytextarea').value = "";
+        }
+
+    </script>
+</body>
+
+</html>

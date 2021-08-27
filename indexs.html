@@ -1,0 +1,33 @@
+<!--
+ * @Description: It was written by Pony
+ * @Version: 2.0
+ * @Autor: Pony
+ * @Date: 2020-09-02 22:23:14
+ * @LastEditors: Pony
+ * @LastEditTime: 2020-09-14 09:24:11
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/chimee/0.1.1/index.browser.js"></script>
+</head>
+<body>
+    <button id="btns">replaceState</button>
+    <button id="btns_1">pushState</button>
+    <script>
+        let btn_1 = document.getElementById('btns');
+        btn_1.onclick = () => {
+            let pages = {flg:124}
+            history.replaceState(pages,"","loading.html")
+        }
+        let btn_2 = document.getElementById('btns_1');
+        btn_2.onclick = () => {
+            let pages = {flg:124}
+            history.replaceState(pages,"","loading.html")
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!--
+ * @Description: It was written by Pony
+ * @Version: 2.0
+ * @Autor: Pony
+ * @Date: 2020-10-27 17:52:54
+ * @LastEditors: PONY ZHANG
+ * @LastEditTime: 2020-11-24 10:20:45
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FilePond from CDN</title>
+
+    <!-- Filepond CSS -->
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <!--    FilePondPluginImagePreview 插件 CSS-->
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+    <!--    FilePondPluginImageEdit 插件 CSS-->
+    <link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- 我们将把这个输入框变成上传文件框 -->
+<input type="file" class="filepond">
+
+<!-- FilePondPluginImagePreview 插件js-->
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<!--FilePondPluginImageEdit 插件js-->
+<script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
+<!--FilePondPluginFileValidateSize 插件js-->
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+<!--FilePondPluginFileValidateType 插件js-->
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<!--FilePondPluginImageCrop 插件js-->
+<script src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.js"></script>
+<!--FilePondPluginImageExifOrientation 插件js-->
+<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
+<!--引入Filepond的js-->
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+<script>
+    // querySelector() 方法返回文档中匹配指定 CSS 选择器的一个元素。
+    var inputElement = document.querySelector('input[type="file"]');
+
+    // 注册插件
+    // FilePondPluginImagePreview  上传时可以预览到上传的图片等
+    // FilePondPluginImageEdit   由于doka收费，所以编辑功能就不演示了。
+    // FilePondPluginFileValidateType  图片类型
+    // FilePondPluginImageCrop 图像裁剪
+    // FilePondPluginFileValidateSize   文件大小验证插件处理阻止太大的文件。
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview,
+        FilePondPluginImageEdit,
+        FilePondPluginFileValidateSize,
+        FilePondPluginImageCrop,
+        FilePondPluginFileValidateType,
+        FilePondPluginImageExifOrientation
+
+    );
+
+    FilePond.setOptions({
+        // 设置单个URL是定义服务器配置的最基本形式。
+        server: 'http://47.110.70.217:8070/file/upload',
+        // 设置图片类型只能为png才能上传
+        allowFileTypeValidation: false,
+        acceptedFileTypes: "image/jpg",
+        // 启用或禁用图像裁剪
+        allowImageCrop: true,
+
+        // 启用或禁用文件大小验证
+        allowFileSizeValidation: true,
+        maxFileSize: null,
+
+        // 启用或禁用提取EXIF信息
+        allowImageExifOrientation: true
+
+    });
+
+    // 使用create方法逐步增强基本文件输入到FilePond元素。
+    FilePond.create(inputElement)
+</script>
+
+</body>
+</html>

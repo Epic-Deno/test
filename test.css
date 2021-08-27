@@ -1,0 +1,104 @@
+@media (max-width: 450px) {
+  .mailContent .mailHeader {
+    width: 100%;
+    height: 16.8vw;
+  }
+  .mailContent .mailHeader .mailLogo {
+    width: 24.26667vw;
+  }
+  img.category-item-star {
+    width: 4.53333vw;
+    height: 4.53333vw;
+    margin-right: 0.8vw;
+    cursor: pointer;
+  }
+  .review-slogen {
+    height: 14.93333vw;
+    line-height: 14.93333vw;
+    font-size: 5.6vw;
+  }
+  .review-box-bottom {
+    width: 100%;
+    padding: 3.46667vw 3.2vw;
+  }
+  .review-box-bottom .review-description {
+    padding: 0 1.33333vw 9.06667vw;
+    font-weight: 300;
+    line-height: 7.73333vw;
+    text-align: center;
+    font-size: 3.46667vw;
+    font-family: "OpenSansLight";
+  }
+  .review-slogen {
+    height: 14.93333vw;
+    line-height: 14.93333vw;
+    font-size: 5.6vw;
+  }
+  .review-box-bottom {
+    width: 100%;
+    padding: 3.46667vw 3.2vw;
+  }
+  .review-box-bottom .review-description {
+    padding: 0 1.33333vw 9.06667vw;
+    font-weight: 300;
+    line-height: 7.73333vw;
+    text-align: center;
+    font-size: 3.46667vw;
+    font-family: "OpenSansLight";
+  }
+  .category-item {
+    padding: 3.46667vw 0 6.13333vw;
+  }
+  .category-item .catgory-item-img {
+    width: 35.46667vw;
+    height: 35.46667vw;
+  }
+  .category-item .category-item-right {
+    width: 314px;
+    height: 35.46667vw;
+    font-weight: 300;
+    font-size: 3.46667vw;
+    line-height: 4.26667vw;
+    margin-left: 1.06667vw;
+    padding-top: 1.6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .category-item li.title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .category-item li.category-item-rate {
+    margin-top: 0;
+  }
+  .category-item li.category-item-btn {
+    width: 31.73333vw;
+    height: 6.66667vw;
+    line-height: 6.66667vw;
+    cursor: pointer;
+    background: #dc0414;
+    border-radius: 1.6vw;
+    font-size: 3.46667vw;
+    color: #fff;
+    font-family: "OpenSansSemibold";
+    text-align: center;
+    margin-top: 0;
+  }
+  .category-item li.category-item-infos {
+    width: 53.33333vw;
+    font-size: 2.13333vw;
+    font-weight: 300;
+    color: #000000;
+    line-height: 16px;
+    margin-top: 0;
+  }
+  .category-item li.category-item-infos a {
+    text-decoration: underline;
+    font-size: 2.13333vw;
+    cursor: pointer;
+  }
+}

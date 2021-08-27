@@ -1,0 +1,259 @@
+<!--
+ * @Description: KEEP CALM AND MAKE EPIC SHIT - PONY ZHANG
+ * @Version: 2.0
+ * @Autor: PONY ZHANG
+ * @Date: 2020-12-07 14:01:07
+ * @LastEditors: PONY ZHANG
+ * @LastEditTime: 2020-12-09 10:10:53
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .preview-wrap {
+            width: 452px;
+            /* margin: 200px auto; */
+        }
+
+        .spec-list {
+
+            position: relative;
+        }
+
+        .spec-list .arrow-next,
+        .spec-list .arrow-prev {
+            display: block;
+            width: 22px;
+            height: 32px;
+            float: left;
+            position: absolute;
+            cursor: pointer;
+            top: 50%;
+            margin-top: -16px;
+        }
+
+        .spec-list .arrow-prev .sprite-arrow-prev {
+            width: 22px;
+            height: 32px;
+
+        }
+
+        .spec-list .arrow-next i,
+        .spec-list .arrow-prev i {
+            display: block;
+        }
+
+        .spec-list .arrow-prev {
+            left: 0;
+        }
+
+        .spec-list .arrow-next {
+            right: 0;
+        }
+
+        .spec-list .arrow-prev.disabled i {
+            background: url(//static.360buyimg.com/item/unite/1.0.113/components/default-soa/preview/i/disabled-prev.png);
+        }
+
+        .spec-list .arrow-next .sprite-arrow-next {
+            width: 22px;
+            height: 32px;
+            background-image: url(//static.360buyimg.com/item/unite/1.0.113/components/default-soa/preview/i/__sprite.png);
+            background-position: -78px 0;
+        }
+
+        .ul {
+            transition: all 5ms ease-in-out;
+        }
+
+        .spec-items {
+            position: relative;
+            width: 380px;
+            height: 58px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .spec-items ul li {
+            float: left;
+            margin: 0 9px;
+            max-width: 60px;
+            max-height: 70px;
+        }
+
+        .spec-items ul li.img-hover img,
+        .spec-items ul li:hover img {
+            border: 2px solid #e53e41;
+        }
+
+        .goods {
+            width: 450px;
+            height: 450px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .goods img {
+            width: 450px;
+            height: 450px;
+
+        }
+
+        span {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            background-color: yellow;
+            left: 0;
+            top: 0;
+            opacity: 0.5;
+            display: none;
+            cursor: move;
+
+        }
+
+        #show {
+            width: 500px;
+            height: 508px;
+            border: 1px solid #ccc;
+            position: absolute;
+            left: 450px;
+            top: 0px;
+            display: none;
+            overflow: hidden;
+        }
+
+        #show img {
+
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preview-wrap">
+        <div class="goods">
+            <img src="https://img14.360buyimg.com/n1/s450x450_jfs/t1/137504/23/7407/105232/5f3d1e32Ec3a9598b/64332079e66a291c.jpg"
+                alt="">
+            <span></span>
+        </div>
+        <div class="spec-list">
+            <a id="spec-forward" href="javascript:;" class="arrow-prev disabled"><i class="sprite-arrow-prev"></i></a>
+            <a id="spec-backward" href="javascript:;" class="arrow-next"><i class="sprite-arrow-next"></i></a>
+            <div class="spec-items">
+                <ul class="lh" style="position: absolute; width: 608px; height: 58px; top: 0px; left: 0px;">
+                    <li class="img-hover"><img alt="三星 Galaxy A71 5G（SM-A7160）双模5G 6400万后置四摄 4500mAh大电池 8GB+128GB 镭丝黑"
+                            src="//img14.360buyimg.com/n5/s54x54_jfs/t1/137504/23/7407/105232/5f3d1e32Ec3a9598b/64332079e66a291c.jpg"
+                            data-url="jfs/t1/137504/23/7407/105232/5f3d1e32Ec3a9598b/64332079e66a291c.jpg" data-img="1"
+                            width="54" height="54"></li>
+                    <li class=""><img alt="三星 Galaxy A71 5G（SM-A7160）双模5G 6400万后置四摄 4500mAh大电池 8GB+128GB 镭丝黑"
+                            src="//img14.360buyimg.com/n5/s54x54_jfs/t1/149270/5/5898/77472/5f3d1e32Ebe5c67d0/d53ac6a9966e9ef4.jpg"
+                            data-url="jfs/t1/149270/5/5898/77472/5f3d1e32Ebe5c67d0/d53ac6a9966e9ef4.jpg" data-img="1"
+                            width="54" height="54"></li>
+                    <li class=""><img alt="三星 Galaxy A71 5G（SM-A7160）双模5G 6400万后置四摄 4500mAh大电池 8GB+128GB 镭丝黑"
+                            src="//img14.360buyimg.com/n5/s54x54_jfs/t1/137100/22/7339/43443/5f3d1e32E609ddfc8/a1b078d3336bca49.jpg"
+                            data-url="jfs/t1/137100/22/7339/43443/5f3d1e32E609ddfc8/a1b078d3336bca49.jpg" data-img="1"
+                            width="54" height="54"></li>
+                    <li class=""><img alt="三星 Galaxy A71 5G（SM-A7160）双模5G 6400万后置四摄 4500mAh大电池 8GB+128GB 镭丝黑"
+                            src="//img14.360buyimg.com/n5/s54x54_jfs/t1/137603/17/5785/35831/5f3d1e32E7c9c3fe4/c4326370c7f347e6.jpg"
+                            data-url="jfs/t1/137603/17/5785/35831/5f3d1e32E7c9c3fe4/c4326370c7f347e6.jpg" data-img="1"
+                            width="54" height="54"></li>
+                    <li class=""><img alt="三星 Galaxy A71 5G（SM-A7160）双模5G 6400万后置四摄 4500mAh大电池 8GB+128GB 镭丝黑"
+                            src="//img14.360buyimg.com/n5/s54x54_jfs/t1/129654/6/7374/12510/5f3d1e32E8b13b617/8973cd8ad44b0a38.jpg"
+                            data-url="jfs/t1/129654/6/7374/12510/5f3d1e32E8b13b617/8973cd8ad44b0a38.jpg" data-img="1"
+                            width="54" height="54"></li>
+                    <li class=""><img alt="三星 Galaxy A71 5G（SM-A7160）双模5G 6400万后置四摄 4500mAh大电池 8GB+128GB 镭丝黑"
+                            src="//img14.360buyimg.com/n5/s54x54_jfs/t1/137510/1/7405/14177/5f3d1e32Ed013c41d/0eaf2fa3356d3d13.jpg"
+                            data-url="jfs/t1/137510/1/7405/14177/5f3d1e32Ed013c41d/0eaf2fa3356d3d13.jpg" data-img="1"
+                            width="54" height="54"></li>
+                    <li class=""><img alt="三星 Galaxy A71 5G（SM-A7160）双模5G 6400万后置四摄 4500mAh大电池 8GB+128GB 镭丝黑"
+                            src="//img14.360buyimg.com/n5/s54x54_jfs/t1/118556/6/15437/13351/5f3d1e32E8fdded03/79fc096ba7089916.jpg"
+                            data-url="jfs/t1/118556/6/15437/13351/5f3d1e32E8fdded03/79fc096ba7089916.jpg" data-img="1"
+                            width="54" height="54"></li>
+                    <li><img alt="三星 Galaxy A71 5G（SM-A7160）双模5G 6400万后置四摄 4500mAh大电池 8GB+128GB 镭丝黑"
+                            src="//img14.360buyimg.com/n5/s54x54_jfs/t1/121650/9/10075/12474/5f3d1e32Eae745159/d17f17ba436928c1.jpg"
+                            data-url="jfs/t1/121650/9/10075/12474/5f3d1e32Eae745159/d17f17ba436928c1.jpg" data-img="1"
+                            width="54" height="54"></li>
+                </ul>
+            </div>
+
+
+        </div>
+        <div id="show">
+            <img src="https://img14.360buyimg.com//n0/jfs/t1/137504/23/7407/105232/5f3d1e32Ec3a9598b/64332079e66a291c.jpg"
+                alt="">
+        </div>
+        
+    </div>
+    <script>
+        let uls = document.getElementsByClassName('lh')[0];
+        let forwards = document.getElementById('spec-forward');
+        let backwards = document.getElementById('spec-backward');
+
+
+        forwards.onclick = () => {
+            let leftDet = uls.style.left.split('px')[0];
+
+            console.log("🚀 ~ file: index.html ~ line 147 ~ leftDet", leftDet)
+
+            if (leftDet != 0) {
+                uls.style.left = '0' + 'px';
+            }
+        }
+        backwards.onclick = () => {
+            let leftDet = uls.style.left.split('px')[0];
+
+            if (leftDet == 0) {
+                uls.style.left = '-228' + 'px';
+            }
+        }
+    </script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        //first complete the movement of the yellow pic
+        $('.goods').on('mouseover', function () {
+            $('span').show();
+            $('#show').show();
+            var maxHeight = $('.goods').height() - $('span').height();
+            var maxWeight = $('.goods').width() - $('span').width();
+            $('.goods').on('mousemove', function (e) {
+                var x = e.clientX;
+                var y = e.clientY;
+                var cy = y - $('.goods').offset().top - $('span').width() / 2;
+                var cx = x - $('.goods').offset().left - $('span').width() / 2;
+                if (cx < 0) cx = 0;
+                if (cy < 0) cy = 0;
+                if (cy > maxHeight) cy = maxHeight;
+                if (cx > maxWeight) cx = maxWeight;
+                var percentX = $('span').position().left / $('.goods').width();
+                var percentY = $('span').position().top / $('.goods').height();
+                $('span').css({
+                    left: cx,
+                    top: cy
+                })
+                $('#show').find('img').css({
+                    top: -percentY * $('#show').find('img').height(),
+                    left: -percentX * $('#show').find('img').width()
+                })
+            });
+
+        }).on('mouseout', function () {
+            $('span').hide();
+            $('#show').hide();
+        });
+    </script>
+</body>
+
+</html>

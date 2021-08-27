@@ -1,0 +1,133 @@
+ //375时候自适应的
+ @function sm($px) {
+  @return  ($px / 375) * 100vw;
+}
+
+@mixin RowSpaceBetweenEnd($alignItems: flex-end) {
+  display: flex;
+  justify-content: space-between;
+  align-items: $alignItems;
+}
+
+
+@mixin TextLine($num) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $num;
+ }
+ 
+@media (max-width: 450px) {
+  .mailContent {
+    .mailHeader {
+      width: 100%;
+      height: sm(63);
+      .mailLogo {
+        width: sm(91);
+      }
+    }
+  }
+  img.category-item-star {
+    width: sm(17);
+    height: sm(17);
+    margin-right: sm(3);
+    cursor: pointer;
+}
+  .review-slogen {
+    height: sm(56);
+    line-height: sm(56);
+    font-size: sm(21);
+  }
+
+  .review-box-bottom {
+    width: 100%;
+    padding: sm(13) sm(12);
+
+    .review-description {
+      padding: 0 sm(5) sm(34);
+      font-weight: 300;
+      line-height: sm(29);
+      text-align: center;
+      font-size: sm(13);
+      font-family: "OpenSansLight";
+    }
+  }
+    .review-slogen {
+      height: sm(56);
+      line-height: sm(56);
+      font-size: sm(21);
+    }
+  
+    .review-box-bottom {
+      width: 100%;
+      padding: sm(13) sm(12);
+  
+      .review-description {
+        padding: 0 sm(5) sm(34);
+        font-weight: 300;
+        line-height: sm(29);
+        text-align: center;
+        font-size: sm(13);
+        font-family: "OpenSansLight";
+      }
+    }
+    .category-item {
+      padding: sm(13) 0 sm(23);
+  
+      .catgory-item-img {
+        width: sm(133);
+        height: sm(133);
+      }
+  
+      .category-item-right {
+        width: 314px;
+        height: sm(133);
+        font-weight: 300;
+        font-size: sm(13);
+        line-height: sm(16);
+        margin-left: sm(4);
+        padding-top: sm(6);
+        @include RowSpaceBetweenEnd(flex-start);
+        flex-direction: column
+      }
+  
+      li.title {
+        @include TextLine(2);
+      }
+  
+      li.category-item-rate {
+        margin-top: 0;
+      }
+  
+      li.category-item-btn {
+        width: sm(119);
+        height: sm(25);
+        line-height: sm(25);
+        cursor: pointer;
+        background: #dc0414;
+        border-radius: sm(6);
+        font-size: sm(13);
+        color: #fff;
+        font-family: "OpenSansSemibold";
+        text-align: center;
+       
+        margin-top: 0;
+      }
+  
+      li.category-item-infos {
+        width: sm(200);
+      //   height: sm(18);
+        font-size: sm(8);
+        font-weight: 300;
+        color: #000000;
+        line-height: 16px;
+        margin-top: 0;
+  
+        a {
+          text-decoration: underline;
+          font-size: sm(8);
+          cursor: pointer;
+        }
+      }
+    }
+  }

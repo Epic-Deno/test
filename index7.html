@@ -1,0 +1,118 @@
+<!--
+ * @Description: Powered By Fantastic Artwork Vue.js @ Evan You.
+ * @Purpose: Purpose
+ * @Version: 2.6.1
+ * @Author: PONY ZHANG
+ * @Date: 2021-02-02 22:17:27
+ * @LastEditors: PONY ZHANG
+ * @LastEditTime: 2021-02-02 23:10:26
+ * @motto: 「あなたに逢えなくなって、錆びた時計と泣いたけど…」
+ * @topic: # Carry Your World #
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex: 1;
+            background-color: antiquewhite;
+            padding: 30px;
+        }
+
+        .box {
+            width: 300px;
+            height: 250px;
+            background: linear-gradient(#fb3 50%, #58a 50%);
+            background-size: 100% 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .box1 {
+            width: 400px;
+            padding: 20px;
+            border-radius: 6px;
+            position: absolute;
+            right: 10px;
+            top: 20px;
+            border: 2px solid transparent;
+            background-image: linear-gradient(#fff, #fff),
+                              repeating-linear-gradient(
+                                  -45deg,
+                                  #000 0%, #000 25%,
+                                  #fff 0%, #fff 50%
+                              );
+            background-size: 10px 10px;
+            background-clip: padding-box, border-box;
+            animation: ants 10s linear  infinite;
+        }
+
+        @keyframes ants {
+            to {
+                background-position: 100%;
+            }
+        }
+        footer {
+            padding: 50px;
+            background-color: rgb(48, 46, 46);
+        }
+
+        .switch {
+            position: absolute;
+            clip: rect(0,0,0,0);
+        }
+
+        .switch + label {
+            display: inline-block;
+            height: 15px;
+            width: 30px;
+            border-radius: 10px;
+            background-color: #eee;
+            position: relative;
+        }
+        .switch +label::before {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            background-color: #fff;
+            right: 0;
+            top: 0;
+            box-shadow: 0 0 2px #666;
+        }
+        .switch:checked + label {
+            background-color: yellowgreen;
+        }
+        .switch:checked + label::before {
+            left: 0;
+            transition: all 100s ease;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <input type="checkbox" id="connect" class="switch">
+        <label for="connect"></label>
+    </main>
+    <container class="box"></container>
+    <container class="box1">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, aspernatur! Non, autem libero dolorum laudantium beatae maiores voluptates saepe voluptas natus vel consequatur. Iusto, possimus et! Modi ex magni eveniet!
+    </container>   
+    <footer></footer>
+</body>
+</html>

@@ -1,0 +1,7 @@
+.container {
+  z-index: -1;
+}
+
+.container.actived ~ .container::after {
+  left: 0;
+}

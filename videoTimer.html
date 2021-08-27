@@ -1,0 +1,38 @@
+<!--
+ * @Description: Description
+ * @Purpose: Powered By Fantastic Artwork Vue.js @ Evan You.
+ * @Version: 2.6.1
+ * @Author: PONY ZHANG
+ * @Date: 2021-03-12 14:10:36
+ * @LastEditors: PONY ZHANG
+ * @LastEditTime: 2021-03-12 14:10:36
+ * @motto: 「あなたに逢えなくなって、錆びた時計と泣いたけど…」
+ * @topic: # Carry Your World #
+ * @Github: Epic-Deno
+ * @Blogs: https://epic-deno.github.io/deno.github.io/
+ * @Pony: http://scorpionz.gitee.io/pony-zhang/
+ * @Juejin: https://juejin.im/user/1151943917713623
+ * @Zhihu: https://www.zhihu.com/people/zhang-zhen-36-44
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="file" id='upload'>
+<button onclick='getVideoTime()'>获取时长</button>
+</body>
+<script>
+    function getVideoTime() {
+        var fileVIdeo =  document.getElementById("upload").files[0]
+        var url = URL.createObjectURL(fileVIdeo);
+        var audioElement = new Audio(url);
+        audioElement.addEventListener("loadedmetadata", function (_event) {
+            var duration = audioElement.duration;
+            console.log("视频时长："+duration+"秒");
+        });
+    }
+</script>
+</html>

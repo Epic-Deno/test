@@ -1,0 +1,44 @@
+<!--
+ * @Description: It was written by Pony
+ * @Version: 2.0
+ * @Autor: Pony
+ * @Date: 2020-08-23 16:21:10
+ * @LastEditors: Pony
+ * @LastEditTime: 2020-08-23 17:12:08
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="loader">
+        <span style="--i:1;"></span>
+        <span style="--i:2;"></span>
+        <span style="--i:3;"></span>
+        <span style="--i:4;"></span>
+        <span style="--i:5;"></span>
+        <span style="--i:6;"></span>
+        <span style="--i:7;"></span>
+
+    </div>
+    <i class="loadingTitle">loading...</i>
+    <svg>
+        <filter id="gooey">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+            <feColorMatrix values="
+                    1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0
+                    0 0 0 20 -10
+                " />
+        </filter>
+    </svg>
+</body>
+
+</html>

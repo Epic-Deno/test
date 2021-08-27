@@ -1,0 +1,89 @@
+<!--
+ * @Description: loading
+ * @Purpose: Powered By Fantastic Artwork Vue.js @ Evan You.
+ * @Version: 2.6.1
+ * @Author: PONY ZHANG
+ * @Date: 2021-04-09 10:55:14
+ * @LastEditors: PONY ZHANG
+ * @LastEditTime: 2021-04-09 11:17:38
+ * @motto: 「あなたに逢えなくなって、錆びた時計と泣いたけど…」
+ * @topic: # Carry Your World #
+ * @Github: Epic-Deno
+ * @Blogs: https://epic-deno.github.io/deno.github.io/
+ * @Pony: http://scorpionz.gitee.io/pony-zhang/
+ * @Juejin: https://juejin.im/user/1151943917713623
+ * @Zhihu: https://www.zhihu.com/people/zhang-zhen-36-44
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loading</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #e23b524d
+        }
+        .loader {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            filter: url(#gooey);
+            background: url("https://aodour.oss-ap-southeast-1.aliyuncs.com/Frontend/staticFIle/commonImage/assets/loading.gif") no-repeat;
+            background-size: 140px 140px;
+        }
+
+        .loader span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            animation: animate 4s ease-in-out infinite;
+            animation-delay: calc(0.2s * var(--i));
+        }
+        i.loadingTitle {
+            color: #fff;
+            font-size: 16px;
+            position: absolute;
+            /* font-style: normal; */
+            text-transform: capitalize;
+            font-weight: 400;
+            top: 50%;
+            left: 50%;
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <noscript>
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+                Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+        <div class="container">
+            <div class="loader"></div>
+            <i class="loadingTitle">loading...</i>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+<!--
+ * @Description: Description
+ * @Purpose: Powered By Fantastic Artwork Vue.js @ Evan You.
+ * @Version: 2.6.1
+ * @Author: PONY ZHANG
+ * @Date: 2021-04-14 22:59:42
+ * @LastEditors: PONY ZHANG
+ * @LastEditTime: 2021-04-14 22:59:54
+ * @motto: 「あなたに逢えなくなって、錆びた時計と泣いたけど…」
+ * @topic: # Carry Your World #
+ * @Github: Epic-Deno
+ * @Blogs: https://epic-deno.github.io/deno.github.io/
+ * @Pony: http://scorpionz.gitee.io/pony-zhang/
+ * @Juejin: https://juejin.im/user/1151943917713623
+ * @Zhihu: https://www.zhihu.com/people/zhang-zhen-36-44
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+    <title>流程</title>
+
+    <link href="bootstrap/bootstrap.css" rel="stylesheet" />
+    <script src="jquery-1.10.2.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
+        #myTab li {
+            width: 25%;
+            float: left;
+            height: 40px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #myTab li img {
+            float: left;
+            height: 40px;
+        }
+
+        #myTab li a {
+            color: white;
+            text-align: center;
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+        }
+
+        .blue {
+            background: #0f9af2;
+        }
+
+        .gray {
+            background: #dfdfdf;
+        }
+
+        .tabPaneUl {
+            width: 700px;
+            margin: 0 auto;
+            list-style: none;
+        }
+
+        .tabPaneUl li {
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .tab-pane {
+            margin-top: 50px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+
+        });
+
+        //dom操作
+        var domFun = {
+
+        };
+
+        //事件操作
+        var eventFun = {
+            setStep: function (index) {
+                for (var i = 2; i <= index; i++) {
+                    $("#step" + i + "Li").addClass("blue").removeClass("gray");
+                    $("#step" + i + "Img").attr("src", "images/blue_blue.png");
+                }
+                for (var i = index + 1; i <= 4; i++) {
+                    $("#step" + i + "Li").addClass("gray").removeClass("blue");
+                    $("#step" + i + "Img").attr("src", "images/gray_gray.png");
+                }
+                $("#step" + (index + 1) + "Img").attr("src", "images/blue_gray.png");
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div id="page-inner">
+        <div class="row" style="padding:10px;background: #bebebe">
+            <div class="col-md-12">
+                <div class="input-group" style="width: 60%; float: left;font-size: 20px;font-weight: bolder;">
+                    创建会议
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:30px">
+            <ul id="myTab" role="tablist">
+                <li id="step1Li" class="active blue">
+                    <a href="#step1" onclick="eventFun.setStep(1)" role="tab" data-toggle="tab">
+                        1.流程1
+                    </a>
+                </li>
+                <li id="step2Li" class="gray">
+                    <img id="step2Img" src="images/blue_gray.png" />
+                    <a href="#step2" onclick="eventFun.setStep(2)" role="tab" data-toggle="tab">
+                        2.流程2
+                    </a>
+                </li>
+                <li id="step3Li" class="gray">
+                    <img id="step3Img" src="images/gray_gray.png" />
+                    <a href="#step3" onclick="eventFun.setStep(3)" role="tab" data-toggle="tab">
+                        3.流程3
+                    </a>
+                </li>
+                <li id="step4Li" class="gray">
+                    <img id="step4Img" src="images/gray_gray.png" />
+                    <a href="#step4" onclick="eventFun.setStep(4)" role="tab" data-toggle="tab">
+                        4.流程4
+                    </a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div id="step1" class="tab-pane fade active in">
+                    1
+                </div>
+                <div id="step2" class="tab-pane fade">
+                    2
+                </div>
+                <div id="step3" class="tab-pane fade">
+                    3
+                </div>
+                <div id="step4" class="tab-pane fade">
+                    4
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
