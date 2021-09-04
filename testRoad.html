@@ -3,7 +3,7 @@
  * @Author: Pony
  * @Date: 2021-08-10 14:24:20
  * @LastEditors: Pony
- * @LastEditTime: 2021-08-27 16:50:14
+ * @LastEditTime: 2021-08-30 11:34:19
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -452,8 +452,12 @@
                 }
                 this.$nextTick(_ => {
                     let changeAbleCar = document.querySelector(`#move_${targetCar['carId']}-${this.dataParams['roadId']}`)
+                    // 目标距离问题
+                    let ElementCollection = document.querySelectorAll('.roadSection')
+                    let roadLength = ElementCollection[ElementCollection.length - 1] ? ElementCollection[ElementCollection.length - 1].clientWidth : 0
                     // this.dataParams['process'] + '%'
-                    changeAbleCar.style.left = `calc(${this.dataParams['process']}% - 80px)`
+                    let percentLength = (roadLength * this.dataParams.process / 100) - 140
+                    changeAbleCar.style.left = percentLength <= 0 ? 0 : `calc(${this.dataParams['process']}% - 140px)`
                 })
             },
             // 切换轮回的路段
