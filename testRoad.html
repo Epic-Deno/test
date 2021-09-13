@@ -3,7 +3,7 @@
  * @Author: Pony
  * @Date: 2021-08-10 14:24:20
  * @LastEditors: Pony
- * @LastEditTime: 2021-08-30 11:34:19
+ * @LastEditTime: 2021-09-13 23:29:45
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -75,11 +75,11 @@
             align-items: center;
             position: relative;
         }
-
+/* 
         li.roadSection:nth-child(1) {
             width: 120px;
             flex: none;
-        }
+        } */
 
         /* li.roadSection:last-of-type > .road {
             display:  none;
@@ -234,9 +234,10 @@
             <li class="roadSection" v-for="(item, index) in newRoadList" :key="item['roadName']">
                 <!-- 路段 -->
                 <div class="road" :class="item['roadStatus'] == 0 && 'danger_status'">
-                    <button v-if="roadList.length > 6 && index == newRoadList.length -2 && isOption"
+                    <button
+                        v-if="roadList.length > 6 && index == newRoadList.length - 1 && (baseIndex + 5) < roadList.length - 1"
                         @click="splitRoadArray(true)">add</button>
-                    <button v-if="roadList.length > 6 && index == newRoadList.length -2 && !isOption"
+                    <button v-if="roadList.length > 6 && index == 0 && baseIndex > 0"
                         @click="splitRoadArray(false)">reduce</button>
                 </div>
                 <div class="roadMiddleBox">
@@ -399,16 +400,12 @@
                 canSplit: false,
                 isOption: true,
                 clientWidth: 0,
-                clientHeight: 0
+                clientHeight: 0,
+                baseIndex: -1, // 基础的切换下标
             };
         },
         mounted() {
             this.splitRoadArray(true)
-            // this.timer = setInterval(_ => {
-            //     this.moveCarList.map(i => {
-            //         this.looperCar(i);
-            //     })
-            // }, 3 * 1000)
             this.clientWidth = document.body.clientWidth
             this.clientHeight = document.body.clientHeight
 
@@ -416,15 +413,14 @@
         methods: {
             // 发现当前路段的
             currentlyBuddy(num) {
-                let firstObj = this.roadList[0];
-                let lastObj = this.roadList[this.roadList.length - 1];
                 // 在原始的数据中找目标项目往前取
-                let looperArr = JSON.parse(JSON.stringify(this.roadList)).splice(1, this.roadList.length - 2);
+                let looperArr = JSON.parse(JSON.stringify(this.roadList))
                 let targetIndex = looperArr.findIndex(i => i['code'] == num)// 拿到下标
-                if (targetIndex) {
-                    // 往前减去三个
-                    let newIndex = targetIndex - 3
-                    return [firstObj, ...looperArr.splice(newIndex, 4), lastObj]
+                if (targetIndex == '0' || targetIndex) {
+                    let newIndex = targetIndex - 5 < 0 ? 0 : targetIndex - 5;
+                    this.baseIndex = newIndex;
+                    console.log(this.baseIndex)
+                    return [...looperArr.splice(newIndex, 6)]
                 }
                 return []
             },
@@ -440,7 +436,7 @@
                 targetCar['currentCode'] = this.dataParams['roadId']
                 // 查看路口在新的序列里面吗 this.dataParams['roadId']
                 if (!this.newRoadList.some(i => i['code'] == this.dataParams['roadId'])) {
-                    this.newRoadList = this.currentlyBuddy( this.dataParams['roadId'])
+                    this.newRoadList = this.currentlyBuddy(this.dataParams['roadId'])
                 }
             },
             // 变化百分比
@@ -448,7 +444,7 @@
                 let targetCar = this.moveCarList.find(i => i.carId == this.dataParams.carId);
                 targetCar['currentCode'] = this.dataParams['roadId']
                 if (!this.newRoadList.some(i => i['code'] == this.dataParams['roadId'])) {
-                    this.newRoadList = this.currentlyBuddy( this.dataParams['roadId'])
+                    this.newRoadList = this.currentlyBuddy(this.dataParams['roadId'])
                 }
                 this.$nextTick(_ => {
                     let changeAbleCar = document.querySelector(`#move_${targetCar['carId']}-${this.dataParams['roadId']}`)
@@ -461,39 +457,30 @@
                 })
             },
             // 切换轮回的路段
-            splitRoadArray() {
+            splitRoadArray(flag) {
                 if (this.roadList.length > 6) {
-                    let firstObj = this.roadList[0];
-                    let lastObj = this.roadList[this.roadList.length - 1];
-                    let baseArr = JSON.parse(JSON.stringify(this.roadList)).splice(1, this.roadList.length - 2);
-                    // 获得的新的数组
-                    let maxSplitLength = Math.ceil(baseArr.length / 4)
+                    if (flag) {
+                        if (this.baseIndex + 5 <= this.roadList.length - 1) {
+                            let baseData = JSON.parse(JSON.stringify(this.roadList))
+                            this.baseIndex++;
+                            // 提取6个路口
+                            this.newRoadList = baseData.splice(this.baseIndex, 6)
 
-                    !this.isOption && this.currentlyIndex--;
-                    if (this.currentlyIndex >= 0 && this.currentlyIndex < maxSplitLength) {
-
-                        this.canSplit = true
-                        // 当前的页码 / 4 > 4
-                        let isEnd = baseArr.length - this.currentlyIndex * 4 < 4
-                        let nowArr = new Array()
-                        if (isEnd) {
-                            nowArr = baseArr.splice(-4)
                         } else {
-                            nowArr = baseArr.splice(this.currentlyIndex * 4, 4)
+                            alert('已经到最后面了')
                         }
-                        this.newRoadList = [firstObj, ...nowArr, lastObj]
-                        this.isOption && this.currentlyIndex++;
-                        console.warn(this.currentlyIndex)
-
-
                     } else {
-                        this.currentlyIndex >= maxSplitLength && (this.isOption = false)
-                        this.currentlyIndex >= maxSplitLength && (this.currentlyIndex = maxSplitLength - 1)
-                        this.currentlyIndex <= 0 && (this.isOption = true)
-                        this.currentlyIndex <= 0 && (this.currentlyIndex = 1)
-                        this.canSplit = false
-                        alert('已经没有多余的路口了')
+                        if (this.baseIndex > 0) {
+                            let baseData = JSON.parse(JSON.stringify(this.roadList))
+                            this.baseIndex--;
+                            // 提取6个路口
+                            this.newRoadList = baseData.splice(this.baseIndex, 6)
+
+                        } else {
+                            alert('已经到最前面了')
+                        }
                     }
+
 
                 } else {
                     this.newRoadList = this.roadList
